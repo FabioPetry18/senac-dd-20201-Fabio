@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import model.dao.Banco;
 import model.vo.Cliente;
 import model.vo.Telefone;
 
 public class TelefoneDAO {
-public Telefone salvar(Telefone novoTelefone) {
+
+	public Telefone salvar(Telefone novoTelefone) {
 		
 		Connection conn = Banco.getConnection();
 		String sql = "INSERT INTO TELEFONE (codigoPais, ddd, numero, movel, idCliente, ativo) "
@@ -86,7 +86,7 @@ public Telefone salvar(Telefone novoTelefone) {
 	/**
 	 * Desativa todos os telefones de um determinado cliente.
 	 * 
-	 * @param idCliente a chave prim·ria do cliente
+	 * @param idCliente a chave prim√°ria do cliente
 	 */
 	public void desativarTelefones(int idCliente) {
 		Connection conn = Banco.getConnection();
@@ -202,9 +202,9 @@ public Telefone salvar(Telefone novoTelefone) {
 
 	/**
 	 * 
-	 * ConstrÛi um objeto do tipo Telefone a partir de um registro do resultSet
+	 * Constr√≥i um objeto do tipo Telefone a partir de um registro do resultSet
 	 * 
-	 * @param resultadoDaConsulta o item do resultSet (isto È, um registro da tabela
+	 * @param resultadoDaConsulta o item do resultSet (isto √©, um registro da tabela
 	 *                            Telefone)
 	 * @return um objeto do tipo Telefone
 	 * 
@@ -247,7 +247,7 @@ public Telefone salvar(Telefone novoTelefone) {
 			telefoneJaCadastrado = rs.next();
 
 		} catch (SQLException e) {
-			System.out.println("Erro ao verificar se telefone j· est· cadastrado " + novoTelefone);
+			System.out.println("Erro ao verificar se telefone j√° est√° cadastrado " + novoTelefone);
 			System.out.println("Causa: " + e.getMessage());
 		} finally {
 			Banco.closeResultSet(rs);
