@@ -21,6 +21,10 @@ import controller.EnderecoController;
 
 public class TelaCadastroEndereco extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtRua;
 	private JTextField txtBairro;

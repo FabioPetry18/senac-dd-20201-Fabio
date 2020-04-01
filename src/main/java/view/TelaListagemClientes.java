@@ -1,16 +1,44 @@
 package view;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import controller.ClienteController;
+import model.vo.Cliente;
 
 public class TelaListagemClientes {
 
 	private JFrame frmListagemDeClientes;
+	private JTable tblClientes;
+	private ArrayList<Cliente> clientes;
+	private String[] nomesColunas = { "Nome completo", "CPF", "Qtde. Telefones" };
+
+	private void limparTabelaClientes() {
+		tblClientes.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
+	}
+
+	private void atualizarTabelaClientes() {
+		limparTabelaClientes();
+		DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
+
+		for (Cliente c : clientes) {
+
+			Object[] novaLinhaDaTabela = new Object[3];
+			novaLinhaDaTabela[0] = c.getNomeCompleto();
+			novaLinhaDaTabela[1] = c.getCpf();
+			novaLinhaDaTabela[2] = c.getTelefones().size();
+
+			model.addRow(novaLinhaDaTabela);
+		}
+
+	}
 
 	/**
 	 * Launch the application.
@@ -41,17 +69,28 @@ public class TelaListagemClientes {
 	private void initialize() {
 		frmListagemDeClientes = new JFrame();
 		frmListagemDeClientes.setTitle("Listagem de Clientes");
-		frmListagemDeClientes.setBounds(100, 100, 450, 300);
+		frmListagemDeClientes.setBounds(100, 100, 700, 520);
 		frmListagemDeClientes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmListagemDeClientes.getContentPane().setLayout(null);
-		
-		JButton btnNewButton = new JButton("buscar");
-		btnNewButton.setBackground(new Color(240, 240, 240));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ClienteController controller = new ClienteController();
+				clientes = controller.listarTodosOsClientes();
+
+				atualizarTabelaClientes();
 			}
 		});
-		btnNewButton.setBounds(173, 22, 89, 23);
-		frmListagemDeClientes.getContentPane().add(btnNewButton);
+		btnBuscar.setBounds(280, 30, 120, 30);
+		frmListagemDeClientes.getContentPane().add(btnBuscar);
+
+		tblClientes = new JTable();
+		tblClientes.setBounds(25, 70, 650, 400);
+		frmListagemDeClientes.getContentPane().add(tblClientes);
 	}
-}
+	
+	}
+	
+	
+	
