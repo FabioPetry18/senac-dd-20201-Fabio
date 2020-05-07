@@ -64,6 +64,10 @@ public class TelaCadastroEndereco extends JFrame {
 		JLabel lblRua = new JLabel("Rua (*): ");
 		lblRua.setBounds(10, 15, 50, 16);
 		contentPane.add(lblRua);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 10, 10);
+		contentPane.add(panel);
 
 		JLabel lblBairro = new JLabel("Bairro (*):");
 		lblBairro.setBounds(10, 45, 50, 16);
